@@ -3,7 +3,7 @@ import '../styles.css';
 
 @Component({
   selector: 'app-root',
-  template: require('./app.component.html'),
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
