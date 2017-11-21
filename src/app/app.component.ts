@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import '../styles.css';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: require('./app.component.html'),
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
