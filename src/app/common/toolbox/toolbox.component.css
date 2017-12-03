@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+:host > div {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.add-course {
+  margin-left: auto;
+}

@@ -7,7 +7,7 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseDetailsComponent } from './pages/courses/course-details/course-details.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
-import { SearchComponent } from './common/search/search.component';
+import { ToolboxComponent } from './common/toolbox/toolbox.component';
 import { LoginComponent } from './pages/login/login.component';
 
 
@@ -18,7 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
     CourseDetailsComponent,
     HeaderComponent,
     FooterComponent,
-    SearchComponent,
+    ToolboxComponent,
     LoginComponent
   ],
   imports: [

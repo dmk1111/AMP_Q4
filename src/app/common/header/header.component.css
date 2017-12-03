@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  border: 1px solid lightgrey;
+}
+
+:host > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-name {
+  display: inline-flex;
+}
+
+.user-info {
+  display: inline-flex;
+  margin-left: auto;
+  width: 100px;
+  flex-direction: column;
+  text-align: right;
+  margin-right: 20px;
+}
+
+.user-info p {
+  margin: 0;
+}
