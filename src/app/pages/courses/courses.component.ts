@@ -9,35 +9,34 @@ import { ICourseDetails } from './course-details/course-details.interface';
 })
 export class CoursesComponent implements OnInit {
 
-  public courses: ICourseDetails[] = [
-    {
-      courseDate: this.yourRandomGenerator(2, 8, 2),
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
-      type: 'Video',
-      duration: 88,
-    },
-    {
-      courseDate: this.yourRandomGenerator(2, 8, 2),
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
-      type: 'Video',
-      duration: 15,
-    },
-    {
-      courseDate: this.yourRandomGenerator(2, 8, 2),
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
-      type: 'Video',
-      duration: 135,
-    }
-  ];
+  public courses: ICourseDetails[] = [];
 
   constructor() { }
 
   ngOnInit() {
+    this.courses = [
+      {
+        courseDate: new Date('Mon Dec 04 2017 17:40:51 GMT+0200 (EET)'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
+        type: 'Video',
+        duration: 88,
+      },
+      {
+        courseDate: new Date('Tue Dec 05 2017 17:40:51 GMT+0200 (EET)'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
+        type: 'Video',
+        duration: 15,
+      },
+      {
+        courseDate: new Date('Tue Dec 05 2017 17:45:51 GMT+0200 (EET)'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
+        type: 'Video',
+        duration: 135,
+      }
+    ];
   }
 
-  private yourRandomGenerator(rangeOfDays: number, startHour: number, hourRange: number): Date {
-    const today = new Date(Date.now());
-    return new Date(today.getFullYear() + 1900, today.getMonth(), today.getDate() + Math.random() * rangeOfDays,
-      Math.random() * hourRange + startHour, Math.random() * 60);
+  removeCourse(id: number) {
+    console.log(id);
   }
 }

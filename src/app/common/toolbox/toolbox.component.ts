@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-toolbox',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbox.component.css']
 })
 export class ToolboxComponent implements OnInit {
-
+  @Input() courseName;
   constructor() { }
 
   ngOnInit() {
   }
 
+  search(newValue: string) {
+    console.log(newValue);
+  }
 }
