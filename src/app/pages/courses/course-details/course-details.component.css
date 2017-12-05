@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  border: 1px solid lightgrey;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+:host > div {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+
+.course-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.course-id {
+  margin: 0 5px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 2em;
+}
+
+.course-date {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.course-description {
+  text-indent: 25px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.info {
+  flex: 1 1 auto;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex: 1 0 125px;
+  padding: 15px 0;
+}
+
+.buttons button {
+  margin-bottom: 5px;
+}

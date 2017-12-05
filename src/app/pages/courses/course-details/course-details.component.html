@@ -1,3 +1,13 @@
-<p>
-  course-detail works!
-</p>
+<div>
+  <div class="info">
+    <div class="course-title">{{type}} course <span class="course-id">{{courseId + 1}}</span>
+      {{duration.hours}}h {{duration.minutes}}min
+      <span class="course-date">{{courseDate}}</span></div>
+    <p class="course-description">{{description}}</p>
+  </div>
+
+  <div class="buttons">
+    <button (click)="editCourse()">Edit course</button>
+    <button (click)="deleteCourse()">Delete</button>
+  </div>
+</div>

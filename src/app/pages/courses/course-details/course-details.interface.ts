@@ -3,6 +3,6 @@ export interface ICourseDetails {
   description: string;
   type: 'Video' | 'Webinar';
   duration: number; /* in minutes */
-  editCourse: () => void;
-  deleteCourse: () => void;
+  editCourse?: () => void;
+  deleteCourse?: () => void;
 }
