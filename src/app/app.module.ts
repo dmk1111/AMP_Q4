@@ -11,6 +11,8 @@ import { FooterComponent } from './common/footer/footer.component';
 import { ToolboxComponent } from './common/toolbox/toolbox.component';
 import { LoginComponent } from './pages/login/login.component';
 
+import { AuthorizationService } from "./services/authorization.service";
+import { CoursesService } from "./services/courses.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { LoginComponent } from './pages/login/login.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthorizationService,
+    CoursesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
