@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthorizationService} from '../../services/authorization.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   public placeholder = 'user login';
-  constructor() { }
+  public username: string;
+  authorized: boolean;
+
+  constructor(public authServ: AuthorizationService) {
+  }
 
   ngOnInit() {
+    this.isAuthorized();
+  }
+
+  logOff() {
+    this.authServ.logOut();
+    console.log('Logged out');
+  }
+
+  isAuthorized(): void {
+    this.authServ.isAuth()
+      .subscribe(auth => {
+        this.username = this.authServ.getUserInfo();
+        return this.authorized = auth;
+      });
   }
 
 }
