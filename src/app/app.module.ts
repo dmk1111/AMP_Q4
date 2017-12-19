@@ -14,6 +14,8 @@ import { AuthorizationService } from './services/authorization.service';
 import { CoursesService } from './services/courses.service';
 import { PlateBorderDirective } from './directives/plate-border.directive';
 import { DurationPipe } from './duration.pipe';
+import { OrderByPipe } from './order-by.pipe';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { DurationPipe } from './duration.pipe';
     ToolboxComponent,
     LoginComponent,
     PlateBorderDirective,
-    DurationPipe
+    DurationPipe,
+    OrderByPipe,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

@@ -40,7 +40,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   deleteCourse() {
-    this.removeCourse.emit(this.courseId);
+    this.removeCourse.emit(this.course);
   }
 
 }

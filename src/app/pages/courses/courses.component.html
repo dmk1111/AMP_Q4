@@ -1,4 +1,7 @@
-<course-details *ngFor="let course of courses; index as i;"
+
+<app-toolbox
+  (search)="search($event)"></app-toolbox>
+<course-details *ngFor="let course of courses | orderBy:'courseDate':'Date'; index as i;"
                 [course]="course"
                 [courseId]="i"
                 (removeCourse)="removeCourse($event)"
