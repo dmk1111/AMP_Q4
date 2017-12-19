@@ -1,4 +1,9 @@
 <course-details *ngFor="let course of courses; index as i;"
                 [course]="course"
                 [courseId]="i"
-                (removeCourse)="removeCourse($event)"></course-details>
+                (removeCourse)="removeCourse($event)"
+                [class.top-rated-course]="course.topRated"
+                [appPlateBorder]="course.courseDate"></course-details>
+<div *ngIf="!courses || courses.length === 0">
+  <p>No data. Feel free to add new course</p>
+</div>

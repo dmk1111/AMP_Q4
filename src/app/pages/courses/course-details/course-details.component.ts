@@ -25,7 +25,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   ngOnChanges() {
-    this.courseDate = this.course.courseDate.toLocaleDateString('en-US');
+    this.courseDate = new Date(this.course.courseDate).toLocaleDateString('en-US');
     this.description = this.course.description;
     this.type = this.course.type;
     this.duration = {
