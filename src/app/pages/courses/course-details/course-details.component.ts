@@ -1,10 +1,13 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ICourseDetails } from './course-details.interface';
+import { UpperCasePipe } from '@angular/common';
+import { DurationPipe } from '../../../pipes/duration.pipe';
 
 @Component({
   selector: 'course-details',
   templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.css']
+  styleUrls: ['./course-details.component.css'],
+  providers: [UpperCasePipe, DurationPipe],
 })
 export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails {
   @Input() course: ICourseDetails;
@@ -16,7 +19,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   public type;
   public duration;
 
-  constructor() {
+  constructor(private upPipe: UpperCasePipe) {
 
   }
 
@@ -25,13 +28,10 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   ngOnChanges() {
-    this.courseDate = this.course.courseDate.toLocaleDateString('en-US');
+    this.courseDate = new Date(this.course.courseDate);
     this.description = this.course.description;
-    this.type = this.course.type;
-    this.duration = {
-      hours: Math.floor(this.course.duration / 60),
-      minutes: this.course.duration % 60
-    };
+    this.type = this.course.type === 'Video' ? this.upPipe.transform(this.course.type) : this.course.type ;
+    this.duration = this.course.duration;
 
   }
 
@@ -40,7 +40,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   deleteCourse() {
-    this.removeCourse.emit(this.courseId);
+    this.removeCourse.emit(this.course);
   }
 
 }

@@ -1,0 +1,17 @@
+.top-rated-course {
+  background-color: lightgray;
+}
+
+.no-courses {
+  display: flex;
+  border: 1px solid lightgrey;
+  padding: 10px;
+  background-color: lightgray;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 1.5em;
+}
+
+.no-courses p {
+  margin: 0;
+  text-indent: 20px;
+}

@@ -1,8 +1,8 @@
 <div>
   <div class="info">
     <div class="course-title">{{type}} course <span class="course-id">{{courseId + 1}}</span>
-      {{duration.hours}}h {{duration.minutes}}min
-      <span class="course-date">{{courseDate}}</span></div>
+      {{duration | duration}} <span *ngIf="course.topRated" class="top-rated"> &#x2606;</span>
+      <span class="course-date">{{courseDate | date: 'dd/MM/yyyy'}}</span></div>
     <p class="course-description">{{description}}</p>
   </div>
 
