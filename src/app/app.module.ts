@@ -13,9 +13,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthorizationService } from './services/authorization.service';
 import { CoursesService } from './services/courses.service';
 import { PlateBorderDirective } from './directives/plate-border.directive';
-import { DurationPipe } from './duration.pipe';
-import { OrderByPipe } from './order-by.pipe';
-import { SearchPipe } from './search.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [

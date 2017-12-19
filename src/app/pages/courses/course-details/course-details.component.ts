@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ICourseDetails } from './course-details.interface';
 import { UpperCasePipe } from '@angular/common';
-import { DurationPipe } from '../../../duration.pipe';
+import { DurationPipe } from '../../../pipes/duration.pipe';
 
 @Component({
   selector: 'course-details',

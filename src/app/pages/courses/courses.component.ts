@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ICourseDetails } from './course-details/course-details.interface';
 import { CoursesService } from '../../services/courses.service';
-import { OrderByPipe } from '../../order-by.pipe';
-import { SearchPipe } from '../../search.pipe';
+import { OrderByPipe } from '../../pipes/order-by.pipe';
+import { SearchPipe } from '../../pipes/search.pipe';
 
 @Component({
   selector: 'app-courses',
