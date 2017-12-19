@@ -4,6 +4,6 @@
                 (removeCourse)="removeCourse($event)"
                 [class.top-rated-course]="course.topRated"
                 [appPlateBorder]="course.courseDate"></course-details>
-<div *ngIf="!courses || courses.length === 0">
+<div *ngIf="!courses || courses.length === 0" class="no-courses">
   <p>No data. Feel free to add new course</p>
 </div>

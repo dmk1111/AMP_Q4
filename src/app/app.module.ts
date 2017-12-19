@@ -13,6 +13,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthorizationService } from './services/authorization.service';
 import { CoursesService } from './services/courses.service';
 import { PlateBorderDirective } from './directives/plate-border.directive';
+import { DurationPipe } from './duration.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PlateBorderDirective } from './directives/plate-border.directive';
     FooterComponent,
     ToolboxComponent,
     LoginComponent,
-    PlateBorderDirective
+    PlateBorderDirective,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { PlateBorderDirective } from './directives/plate-border.directive';
   ],
   providers: [
     AuthorizationService,
-    CoursesService
+    CoursesService,
+    DurationPipe
   ],
   bootstrap: [AppComponent]
 })
