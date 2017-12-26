@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ICourseDetails } from './course-details.interface';
 import { UpperCasePipe } from '@angular/common';
 import { DurationPipe } from '../../../pipes/duration.pipe';
@@ -8,6 +8,7 @@ import { DurationPipe } from '../../../pipes/duration.pipe';
   templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.css'],
   providers: [UpperCasePipe, DurationPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails {
   @Input() course: ICourseDetails;
@@ -36,7 +37,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   editCourse() {
-
+    console.log('Edit clicked!');
   }
 
   deleteCourse() {
