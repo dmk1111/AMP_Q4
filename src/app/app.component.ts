@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   constructor(private authServ: AuthorizationService) {}
 
   ngOnInit() {
-    this.authServ.getUserInfo();
+    this.authServ.checkAuth();
     this.isAuthorized();
   }
 

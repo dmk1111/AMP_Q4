@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     this.authServ.isAuth()
       .subscribe(auth => {
         this.username = this.authServ.getUserInfo();
-        return this.authorized = auth;
+        this.authorized = auth;
       });
   }
 

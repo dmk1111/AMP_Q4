@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { ReplaySubject } from "rxjs/ReplaySubject";
 
 @Injectable()
 export class AuthorizationService {
 
-  private auth: boolean;
+  private auth: ReplaySubject<boolean>;
 
-  constructor() { }
+  constructor() {
+    this.auth = new ReplaySubject<boolean>();
+  }
 
   logIn(username: string, token: string): void {
     localStorage.setItem('username', username);
     localStorage.setItem('token', token);
-    this.auth = true;
+    this.auth.next(true);
   }
 
   logOut(): void {
     localStorage.clear();
-    this.auth = false;
+    this.auth.next(false);
   }
 
-  isAuth(): Observable<boolean> {
-    return new Observable( observer => {
-      setInterval(() => {
-        observer.next(this.auth);
-      }, 500);
-    });
+  isAuth(): ReplaySubject<boolean> {
+    return this.auth;
+  }
+
+  checkAuth(): void {
+    this.auth.next(!!localStorage.getItem('username'));
   }
 
   getUserInfo(): string {
-    this.auth = !!localStorage.getItem('username');
     return localStorage.getItem('username');
   }
 

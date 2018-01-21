@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ICourseDetails } from '../pages/courses/course-details/course-details.interface';
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CoursesService {
@@ -37,8 +40,8 @@ export class CoursesService {
     ];
   }
 
-  getList(): ICourseDetails[] {
-    return this.courses;
+  getList(): Observable<ICourseDetails> {
+    return Observable.from(this.courses);
   }
 
   getItem(id: number): ICourseDetails {
