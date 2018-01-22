@@ -3,13 +3,16 @@ import { ICourseDetails } from '../pages/courses/course-details/course-details.i
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
+import { ReplaySubject } from "rxjs/ReplaySubject";
 
 @Injectable()
 export class CoursesService {
 
   private courses: ICourseDetails[] = [];
+  private editing: ReplaySubject<boolean>;
 
   constructor() {
+    this.editing = new ReplaySubject<boolean>();
     this.courses = [
       {
         courseDate: 'Fri Dec 29 2017 17:40:51 GMT+0200 (EET)',
@@ -61,5 +64,13 @@ export class CoursesService {
 
   createCourse(course: ICourseDetails): void {
     this.courses.push(course);
+  }
+
+  editCourse(edit: boolean) {
+    this.editing.next(edit);
+  }
+
+  isEditingCourse(): ReplaySubject<boolean> {
+    return this.editing;
   }
 }

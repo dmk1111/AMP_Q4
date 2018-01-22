@@ -13,6 +13,7 @@ import { SearchPipe } from '../../pipes/search.pipe';
 export class CoursesComponent implements OnInit {
 
   public courses: ICourseDetails[] = [];
+  public editing: boolean = false;
 
   private searchValue = '';
 
@@ -28,6 +29,11 @@ export class CoursesComponent implements OnInit {
         return item;
       })
       .subscribe( courses => this.courses.push(courses));
+    this.courseServ.isEditingCourse()
+      .subscribe( editing => {
+        console.log(editing);
+        this.editing = editing;
+      });
   }
 
   removeCourse(item) {

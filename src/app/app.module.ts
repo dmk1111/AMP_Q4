@@ -16,6 +16,7 @@ import { PlateBorderDirective } from './directives/plate-border.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SearchPipe } from './pipes/search.pipe';
     PlateBorderDirective,
     DurationPipe,
     OrderByPipe,
-    SearchPipe
+    SearchPipe,
+    EditCourseComponent
   ],
   imports: [
     BrowserModule,
