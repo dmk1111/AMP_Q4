@@ -13,27 +13,62 @@ import { SearchPipe } from '../../pipes/search.pipe';
 export class CoursesComponent implements OnInit {
 
   public courses: ICourseDetails[] = [];
+  public editing: boolean = false;
 
   private searchValue = '';
 
   constructor(private courseServ: CoursesService, private searchPipe: SearchPipe) { }
 
   ngOnInit() {
-    this.courses = this.courseServ.getList();
+    this.courseServ.getList()
+      .map( item => {
+        console.log(item);
+        if (!item.courseDate) {
+            item.courseDate = new Date().toISOString();
+        }
+        return item;
+      })
+      .subscribe( courses => this.courses.push(courses));
+    this.courseServ.isEditingCourse()
+      .subscribe( editing => {
+        console.log(editing);
+        this.editing = editing;
+      });
   }
 
   removeCourse(item) {
     console.log(`Course deleted!`);
     this.courseServ.removeItem(item);
     if (!this.searchValue) {
-      this.courses = this.courseServ.getList();
+      this.courses = [];
+      this.courseServ.getList()
+        .map( item => {
+          console.log(item);
+          if (!item.courseDate) {
+            item.courseDate = new Date().toISOString();
+          }
+          return item;
+        })
+        .subscribe( courses => this.courses.push(courses));
     } else {
       this.search(this.searchValue);
     }
   }
 
   search(value: string): any {
+    let coursesArr = [];
     this.searchValue = value;
-    this.courses = this.searchPipe.transform(this.courseServ.getList(), this.searchValue, 'type');
+    this.courseServ.getList()
+      .map( item => {
+        console.log(item);
+        if (!item.courseDate) {
+          item.courseDate = new Date().toISOString();
+        }
+        return item;
+      })
+      .subscribe( courses => {
+        coursesArr.push(courses);
+        this.courses = this.searchPipe.transform(coursesArr, this.searchValue, 'type');
+      });
   }
 }

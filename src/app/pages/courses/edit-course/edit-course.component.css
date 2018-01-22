@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.buttons {
+  display: flex;
+  width: 300px;
+}
+
+label {
+  width: 200px;
+  display: inline-block;
+}
