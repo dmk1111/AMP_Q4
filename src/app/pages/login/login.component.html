@@ -3,6 +3,6 @@
   <label for="username">Username</label>
       <input #username type="text" id="username">
   <label for="passwd">Password</label>
-    <input #password type="text" id="passwd">
-  <button type="submit" (click)="login(username.value, password.value)">Enter</button>
+    <input #password type="password" id="passwd">
+  <button type="button" (click)="login(username.value, password.value)">Enter</button>
 </form>
