@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { ICourseDetails } from './course-details.interface';
+import { ICourseDetails } from '../../../app.interfaces';
 import { UpperCasePipe } from '@angular/common';
 import { DurationPipe } from '../../../pipes/duration.pipe';
 
@@ -12,13 +12,13 @@ import { DurationPipe } from '../../../pipes/duration.pipe';
 })
 export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails {
   @Input() course: ICourseDetails;
-  @Input() courseId: number;
   @Output() removeCourse: EventEmitter<any> = new EventEmitter();
 
-  public courseDate;
+  public id;
+  public date;
   public description;
   public type;
-  public duration;
+  public length;
 
   constructor(private upPipe: UpperCasePipe) {
 
@@ -29,10 +29,11 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   ngOnChanges() {
-    this.courseDate = new Date(this.course.courseDate);
+    this.id = this.course.id;
+    this.date = new Date(this.course.date);
     this.description = this.course.description;
     this.type = this.course.type === 'Video' ? this.upPipe.transform(this.course.type) : this.course.type ;
-    this.duration = this.course.duration;
+    this.length = this.course.length;
 
   }
 
