@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import '../styles.css';
 import { AuthorizationService } from './services/authorization.service';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
   authorized: boolean;
+
+  private subscription: Subscription;
   constructor(private authServ: AuthorizationService) {}
 
   ngOnInit() {
@@ -17,8 +20,12 @@ export class AppComponent implements OnInit{
     this.isAuthorized();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   isAuthorized(): void {
-    this.authServ.isAuth()
+    this.subscription = this.authServ.isAuth()
       .subscribe(auth => this.authorized = auth);
   }
 }

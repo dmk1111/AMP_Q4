@@ -17,6 +17,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,12 +36,14 @@ import { EditCourseComponent } from './pages/courses/edit-course/edit-course.com
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [
     AuthorizationService,
     CoursesService,
-    DurationPipe
+    DurationPipe,
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })

@@ -7,7 +7,6 @@ import {AuthorizationService} from '../../services/authorization.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private token = '';
 
   constructor(private authServ: AuthorizationService) { }
 
@@ -15,8 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: string, passwd: string) {
-    this.token = window.btoa(passwd);
-    this.authServ.logIn(username, this.token);
+    this.authServ.logIn(username, passwd);
   }
 
 }

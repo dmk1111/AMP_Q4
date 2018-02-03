@@ -13,21 +13,21 @@ export class PlateBorderDirective implements OnChanges {
   @Input() appPlateBorder: string;
 
   ngOnChanges(changeObj) {
-      this.checkCourseDate(this.appPlateBorder);
+      this.checkdate(this.appPlateBorder);
   }
 
-  private checkCourseDate(createdDate: string) {
+  private checkdate(createdDate: string) {
   if (!this.init) {
     this.oldBorder = this.elem.nativeElement.style.border;
     this.init = true;
   }
-    const courseDate = new Date(createdDate);
+    const date = new Date(createdDate);
     const currentDate = new Date();
     const freshDate = new Date();
     freshDate.setDate(currentDate.getDate() - 14);
-    if ( courseDate < currentDate && courseDate >= freshDate) {
+    if ( date < currentDate && date >= freshDate) {
         this.setBorderColor('green');
-    } else if (courseDate > currentDate) {
+    } else if (date > currentDate) {
       this.setBorderColor('blue');
     } else {
       this.setBorderColor();

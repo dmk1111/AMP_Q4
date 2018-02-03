@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ICourseDetails } from './course-details/course-details.interface';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ICourseDetails } from '../../app.interfaces';
 import { CoursesService } from '../../services/courses.service';
 import { OrderByPipe } from '../../pipes/order-by.pipe';
 import { SearchPipe } from '../../pipes/search.pipe';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-courses',
@@ -10,65 +11,84 @@ import { SearchPipe } from '../../pipes/search.pipe';
   styleUrls: ['./courses.component.css'],
   providers: [OrderByPipe, SearchPipe]
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
 
   public courses: ICourseDetails[] = [];
   public editing: boolean = false;
 
   private searchValue = '';
+  private courseSubscription: Subscription;
+  private itemSubscription: Subscription;
 
   constructor(private courseServ: CoursesService, private searchPipe: SearchPipe) { }
 
   ngOnInit() {
-    this.courseServ.getList()
-      .map( item => {
-        console.log(item);
-        if (!item.courseDate) {
-            item.courseDate = new Date().toISOString();
-        }
-        return item;
-      })
-      .subscribe( courses => this.courses.push(courses));
+    this.courseSubscription = this.courseServ.getList()
+      .subscribe( (courses: ICourseDetails[]) => {
+        this.courses = courses.map( (item: ICourseDetails) => {
+            if (item === undefined || item.length === 0) {
+              return undefined;
+            }
+            if (item.length > 250) {
+              item.type = "Video";
+            } else {
+              item.type = "Webinar";
+            }
+            return item;
+          });
+      });
     this.courseServ.isEditingCourse()
       .subscribe( editing => {
-        console.log(editing);
         this.editing = editing;
       });
   }
 
-  removeCourse(item) {
-    console.log(`Course deleted!`);
-    this.courseServ.removeItem(item);
+  ngOnDestroy() {
+    this.courseSubscription.unsubscribe();
+    this.itemSubscription.unsubscribe();
+    this.courses = [];
+  }
+
+  removeCourse(item: ICourseDetails) {
+    this.itemSubscription = this.courseServ.removeItem(item.id)
+      .subscribe(deleted => {
+        this.courseSubscription = this.courseServ.getList()
+          .subscribe( (courses: ICourseDetails[]) => {
+            this.courses = courses.map( (item: ICourseDetails) => {
+              if (item === undefined || item.length === 0) {
+                return undefined;
+              }
+              if (item.length > 250) {
+                item.type = "Video";
+              } else {
+                item.type = "Webinar";
+              }
+              return item;
+            });
+          });
+      });
     if (!this.searchValue) {
-      this.courses = [];
-      this.courseServ.getList()
-        .map( item => {
-          console.log(item);
-          if (!item.courseDate) {
-            item.courseDate = new Date().toISOString();
-          }
-          return item;
-        })
-        .subscribe( courses => this.courses.push(courses));
+
     } else {
       this.search(this.searchValue);
     }
   }
 
   search(value: string): any {
-    let coursesArr = [];
     this.searchValue = value;
-    this.courseServ.getList()
-      .map( item => {
-        console.log(item);
-        if (!item.courseDate) {
-          item.courseDate = new Date().toISOString();
-        }
-        return item;
-      })
-      .subscribe( courses => {
-        coursesArr.push(courses);
-        this.courses = this.searchPipe.transform(coursesArr, this.searchValue, 'type');
+    this.courseSubscription = this.courseServ.getList()
+      .subscribe( (courses: ICourseDetails[]) => {
+        this.courses = this.searchPipe.transform(courses, this.searchValue, 'type').map( (item: ICourseDetails) => {
+            if (item === undefined || item.length === 0) {
+              return undefined;
+            }
+            if (item.length > 250) {
+              item.type = "Video";
+            } else {
+              item.type = "Webinar";
+            }
+            return item;
+          });
       });
   }
 }
