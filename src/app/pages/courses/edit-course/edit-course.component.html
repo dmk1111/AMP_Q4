@@ -10,7 +10,6 @@
          *ngIf="editCourseForm.get('title').errors?.maxlength">Max length is 50 characters but you entered
       {{editCourseForm.get('title').errors.maxlength.actualLength}}
     </div>
-    <!--<span>{{editCourseForm.get('title').errors | json}}</span>-->
   </div>
   <div>
     <label for="description">Description
@@ -50,13 +49,15 @@
     </div>
   </div>
   <div>
-    <label for="authors">Authors
-    </label>
-    <input type="text" id="authors" name="authors" formControlName="authors">
+    <label>Authors: </label>
+    <authors-input formControlName="authors" [authors]="authors" [nameOption]="authors"></authors-input>
     <div class="validation-error"
          *ngIf="editCourseForm.get('authors').errors?.required && editCourseForm.get('authors').touched"> At least one
       author should be present
     </div>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('authors').errors?.invalidAuthor && editCourseForm.get('authors').touched">
+    Please, select any author to continue</div>
   </div>
   <div class="buttons">
     <button type="button" (click)="stopEditing()" [disabled]="editCourseForm.status === 'INVALID'">Save</button>

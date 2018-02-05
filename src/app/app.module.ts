@@ -18,6 +18,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { AuthorsComponent } from './common/controls/authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     DurationPipe,
     OrderByPipe,
     SearchPipe,
-    EditCourseComponent
+    EditCourseComponent,
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,

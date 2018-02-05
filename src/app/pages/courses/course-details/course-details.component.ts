@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetect
 import { ICourseDetails } from '../../../app.interfaces';
 import { UpperCasePipe } from '@angular/common';
 import { DurationPipe } from '../../../pipes/duration.pipe';
+import { CoursesService } from "../../../services/courses.service";
 
 @Component({
   selector: 'course-details',
@@ -20,7 +21,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   public type;
   public length;
 
-  constructor(private upPipe: UpperCasePipe) {
+  constructor(private upPipe: UpperCasePipe, private courseSev: CoursesService) {
 
   }
 
@@ -39,6 +40,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
 
   editCourse() {
     console.log('Edit clicked!');
+    this.courseSev.editCourse(true);
   }
 
   deleteCourse() {
