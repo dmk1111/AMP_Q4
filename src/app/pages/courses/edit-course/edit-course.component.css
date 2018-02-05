@@ -4,6 +4,15 @@ form {
   margin-left: 20px;
 }
 
+.ng-touched.ng-invalid:not(form) {
+  border: 1px solid red;
+}
+
+.validation-error {
+  color: red;
+  margin-left: 205px;
+}
+
 .buttons {
   display: flex;
   width: 300px;

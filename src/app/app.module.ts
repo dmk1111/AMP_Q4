@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './pages/courses/courses.component';
@@ -18,6 +18,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { AuthorsComponent } from './common/controls/authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +33,14 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     DurationPipe,
     OrderByPipe,
     SearchPipe,
-    EditCourseComponent
+    EditCourseComponent,
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthorizationService,

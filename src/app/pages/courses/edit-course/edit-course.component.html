@@ -1,27 +1,66 @@
-<form>
+<form [formGroup]="editCourseForm">
   <div>
     <label for="title">Title
     </label>
-    <input type="text" id="title">
+    <input type="text" id="title" formControlName="title">
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('title').errors?.required && editCourseForm.get('title').touched"> Title is required
+    </div>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('title').errors?.maxlength">Max length is 50 characters but you entered
+      {{editCourseForm.get('title').errors.maxlength.actualLength}}
+    </div>
   </div>
   <div>
     <label for="description">Description
     </label>
-    <textarea id="description"></textarea>
+    <textarea id="description" formControlName="description"></textarea>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('description').errors?.required && editCourseForm.get('description').touched">
+      Description is required
+    </div>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('description').errors?.maxlength">Max length is 500 characters but you entered
+      {{editCourseForm.get('description').errors.maxlength.actualLength}}
+    </div>
   </div>
   <div>
     <label for="date">Date
     </label>
-    <input type="date" id="date">
+    <input type="text" id="date" formControlName="date">
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('date').errors?.required && editCourseForm.get('date').touched"> Date is required
+    </div>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('date').errors?.pattern">
+      Date should be in format dd/MM/yyyy
+    </div>
   </div>
   <div>
     <label for="duration">Duration
     </label>
-    <input type="number" [(ngModel)]="duration" id="duration" name="duration"> {{duration |
+    <input type="number" id="duration" name="duration" formControlName="duration">
+    {{editCourseForm.get("duration").value |
     duration}}
+
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('duration').errors?.required && editCourseForm.get('duration').touched"> Duration is
+      required
+    </div>
+  </div>
+  <div>
+    <label>Authors: </label>
+    <authors-input formControlName="authors" [authors]="authors" [nameOption]="authors"></authors-input>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('authors').errors?.required && editCourseForm.get('authors').touched"> At least one
+      author should be present
+    </div>
+    <div class="validation-error"
+         *ngIf="editCourseForm.get('authors').errors?.invalidAuthor && editCourseForm.get('authors').touched">
+    Please, select any author to continue</div>
   </div>
   <div class="buttons">
-    <button type="button" (click)="stopEditing()">Save</button>
+    <button type="button" (click)="stopEditing()" [disabled]="editCourseForm.status === 'INVALID'">Save</button>
     <button type="button" (click)="stopEditing()">Cancel</button>
   </div>
 </form>
