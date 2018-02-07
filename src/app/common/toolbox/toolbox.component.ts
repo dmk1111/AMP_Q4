@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CoursesService } from '../../services/courses.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-toolbox',
@@ -9,7 +10,7 @@ import { CoursesService } from '../../services/courses.service';
 export class ToolboxComponent implements OnInit {
   @Input() courseName;
   @Output() search: EventEmitter<any> = new EventEmitter();
-  constructor(private courseServ: CoursesService) { }
+  constructor(private courseServ: CoursesService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -17,9 +18,5 @@ export class ToolboxComponent implements OnInit {
   searchValue(newValue: string) {
     console.log(newValue);
     this.search.emit(newValue);
-  }
-
-  addCourse(): void {
-    this.courseServ.editCourse(true);
   }
 }

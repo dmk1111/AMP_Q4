@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import '../styles.css';
 import { AuthorizationService } from './services/authorization.service';
 import { Subscription } from "rxjs/Subscription";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,9 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
-  authorized: boolean;
 
   private subscription: Subscription;
-  constructor(private authServ: AuthorizationService) {}
+  constructor(private authServ: AuthorizationService, private router: Router) {}
 
   ngOnInit() {
     this.authServ.checkAuth();
@@ -26,6 +26,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   isAuthorized(): void {
     this.subscription = this.authServ.isAuth()
-      .subscribe(auth => this.authorized = auth);
+      .subscribe(auth => {
+        if (!auth) {
+          this.router.navigate(['/login']);
+        }
+      });
   }
 }

@@ -47,27 +47,14 @@ export class CoursesService {
   }
 
   removeItem(id: number): Observable<HttpResponse<Object>> {
-    // const id = this.courses.findIndex(function (element) {
-    //   return element === item;
-    // });
-    // this.courses.splice(id, 1);
     const url = `${this.baseUrl}/courses/${id}`;
 
     return this.http.delete(url, {observe: 'response'});
   }
 
   createCourse(course: ICourseDetails): Observable<object> {
-    // this.courses.push(course);
     const url = `${this.baseUrl}/courses/`;
 
     return this.http.post(url, {course: course});
-  }
-
-  editCourse(edit: boolean) {
-    this.editing.next(edit);
-  }
-
-  isEditingCourse(): ReplaySubject<boolean> {
-    return this.editing;
   }
 }

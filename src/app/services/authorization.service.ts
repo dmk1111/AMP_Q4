@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import "rxjs/add/operator/debounceTime";
+import { Injectable } from '@angular/core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import 'rxjs/add/operator/debounceTime';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthorizationService {
@@ -10,23 +11,24 @@ export class AuthorizationService {
   private baseUrl: string;
   private userInfo: any = {};
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.auth = new ReplaySubject<boolean>();
-    this.baseUrl = "http://localhost:3004";
+    this.baseUrl = 'http://localhost:3004';
   }
 
   logIn(username: string, password: string): void {
-    let body = {
+    const body = {
       login: username,
       password: password
     };
-    let url = `${this.baseUrl}/auth/login`;
+    const url = `${this.baseUrl}/auth/login`;
 
     this.http.post(url, body)
       .subscribe((data: { token: string }) => {
-          localStorage.setItem("username", username);
-          localStorage.setItem("token", data.token);
+          localStorage.setItem('username', username);
+          localStorage.setItem('token', data.token);
           this.auth.next(true);
+          this.router.navigate(['/courses']);
         },
         err => {
           this.auth.next(false);
@@ -36,15 +38,16 @@ export class AuthorizationService {
   logOut(): void {
     localStorage.clear();
     this.auth.next(false);
+    this.router.navigate(['/login']);
   }
 
   isAuth(): ReplaySubject<boolean> {
-    let body = {
-      login: localStorage.getItem("username")
+    const body = {
+      login: localStorage.getItem('username')
     };
-    let url = `${this.baseUrl}/auth/userinfo`;
-    let options = {
-      headers: new HttpHeaders({'Authorization':`${localStorage.getItem("token")}`}),
+    const url = `${this.baseUrl}/auth/userinfo`;
+    const options = {
+      headers: new HttpHeaders({'Authorization': `${localStorage.getItem('token')}`}),
     };
 
     this.http.post(url, body, options)
@@ -61,7 +64,7 @@ export class AuthorizationService {
   }
 
   checkAuth(): void {
-    this.auth.next(!!localStorage.getItem("username"));
+    this.auth.next(!!localStorage.getItem('username'));
   }
 
   getUserInfo(): string {

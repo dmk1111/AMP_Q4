@@ -1,0 +1,17 @@
+div {
+  margin: 0 auto;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 4em;
+  margin: 0;
+}
+
+p {
+  font-size: 2em;
+}

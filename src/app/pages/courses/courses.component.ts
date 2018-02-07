@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ICourseDetails } from '../../app.interfaces';
 import { CoursesService } from '../../services/courses.service';
 import { OrderByPipe } from '../../pipes/order-by.pipe';
 import { SearchPipe } from '../../pipes/search.pipe';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-courses',
@@ -14,7 +14,6 @@ import { Subscription } from "rxjs/Subscription";
 export class CoursesComponent implements OnInit, OnDestroy {
 
   public courses: ICourseDetails[] = [];
-  public editing: boolean = false;
 
   private searchValue = '';
   private courseSubscription: Subscription;
@@ -30,22 +29,22 @@ export class CoursesComponent implements OnInit, OnDestroy {
               return undefined;
             }
             if (item.length > 250) {
-              item.type = "Video";
+              item.type = 'Video';
             } else {
-              item.type = "Webinar";
+              item.type = 'Webinar';
             }
             return item;
           });
       });
-    this.courseServ.isEditingCourse()
-      .subscribe( editing => {
-        this.editing = editing;
-      });
   }
 
   ngOnDestroy() {
-    this.courseSubscription.unsubscribe();
-    this.itemSubscription.unsubscribe();
+    if (this.courseSubscription) {
+      this.courseSubscription.unsubscribe();
+    }
+    if (this.itemSubscription) {
+      this.itemSubscription.unsubscribe();
+    }
     this.courses = [];
   }
 
@@ -59,9 +58,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 return undefined;
               }
               if (item.length > 250) {
-                item.type = "Video";
+                item.type = 'Video';
               } else {
-                item.type = "Webinar";
+                item.type = 'Webinar';
               }
               return item;
             });
@@ -83,9 +82,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
               return undefined;
             }
             if (item.length > 250) {
-              item.type = "Video";
+              item.type = 'Video';
             } else {
-              item.type = "Webinar";
+              item.type = 'Webinar';
             }
             return item;
           });

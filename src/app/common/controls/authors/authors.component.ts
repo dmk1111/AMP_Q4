@@ -55,8 +55,9 @@ export class AuthorsComponent implements ControlValueAccessor {
   writeValue(value: any) {
     if (value !== this.currentValue && value !== null) {
       this.currentValue = value;
+      console.log(this.currentValue);
     } else if (value !== this.currentValue) {
-      this.currentValue = [];
+      this.currentValue = this.authors;
     }
   }
 
