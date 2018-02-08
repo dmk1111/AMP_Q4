@@ -49,7 +49,7 @@
   </div>
   <div>
     <label>Authors: </label>
-    <authors-input formControlName="authors" [authors]="authors" [nameOption]="authors"></authors-input>
+    <authors-input formControlName="authors" [allAuthors]="allAuthors" [authors]="authors" [nameOption]="authors"></authors-input>
     <div class="validation-error"
          *ngIf="editCourseForm.get('authors').errors?.required && editCourseForm.get('authors').touched"> At least one
       author should be present

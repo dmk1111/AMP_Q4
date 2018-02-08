@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ICourseDetails } from '../../app.interfaces';
+import {IAuthor, ICourseDetails} from '../../app.interfaces';
 import { CoursesService } from '../../services/courses.service';
 import { OrderByPipe } from '../../pipes/order-by.pipe';
 import { SearchPipe } from '../../pipes/search.pipe';
@@ -22,7 +22,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(private courseServ: CoursesService, private searchPipe: SearchPipe) { }
 
   ngOnInit() {
-    this.courseSubscription = this.courseServ.getList()
+    this.courseSubscription = this.courseServ.getCoursesList()
       .subscribe( (courses: ICourseDetails[]) => {
         this.courses = courses.map( (item: ICourseDetails) => {
             if (item === undefined || item.length === 0) {
@@ -51,7 +51,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   removeCourse(item: ICourseDetails) {
     this.itemSubscription = this.courseServ.removeItem(item.id)
       .subscribe(deleted => {
-        this.courseSubscription = this.courseServ.getList()
+        this.courseSubscription = this.courseServ.getCoursesList()
           .subscribe( (courses: ICourseDetails[]) => {
             this.courses = courses.map( (item: ICourseDetails) => {
               if (item === undefined || item.length === 0) {
@@ -75,7 +75,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   search(value: string): any {
     this.searchValue = value;
-    this.courseSubscription = this.courseServ.getList()
+    this.courseSubscription = this.courseServ.getCoursesList()
       .subscribe( (courses: ICourseDetails[]) => {
         this.courses = this.searchPipe.transform(courses, this.searchValue, 'type').map( (item: ICourseDetails) => {
             if (item === undefined || item.length === 0) {

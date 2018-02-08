@@ -7,11 +7,11 @@ export interface ICourseDetails {
   editCourse?: () => void;
   deleteCourse?: () => void;
   isTopRated?: boolean;
-  authors?: Author[];
+  authors?: IAuthor[];
   name: string;
 }
 
-export interface Author {
+export interface IAuthor {
   id: number;
   firstName: string;
   lastName: string;

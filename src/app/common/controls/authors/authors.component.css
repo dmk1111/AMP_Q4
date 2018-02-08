@@ -1,0 +1,16 @@
+.authors-controll {
+  width: 20%;
+  min-width: 200px;
+  display: inline-flex;
+  flex-direction: column;
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.author-selected {
+  background-color: lightgreen;
+}
+
+:host {
+  display: inline-block;
+}

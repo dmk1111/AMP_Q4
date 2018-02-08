@@ -1,8 +1,10 @@
-<label *ngFor="let author of authors" class="authors">
-  <input type="checkbox"
-         (change)="setValue($event)"
-         [value]="author"
-         [checked]="value.indexOf(author) !== -1"
-         [disabled]="isDisabled"
-         name="{{nameOption}}"> {{author}}
-</label>
+<div class="authors-controll">
+  <label *ngFor="let author of allAuthors" class="authors" [class]="value.indexOf(author) !== -1 ? 'author-selected' : ''">
+    <input type="checkbox"
+           (change)="setValue($event)"
+           [value]="author"
+           [checked]="value.indexOf(author) !== -1"
+           [disabled]="isDisabled"
+           name="{{nameOption}}"> {{author}}
+  </label>
+</div>

@@ -41,8 +41,6 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   }
 
   editCourse() {
-    console.log('Edit clicked!');
-    // this.courseSev.editCourse(true);
     this.router.navigate(['/courses', this.id]);
   }
 

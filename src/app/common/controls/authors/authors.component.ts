@@ -15,6 +15,7 @@ const CUSTOM_AUTHORS_VALUE_ACCESSOR = {
 })
 export class AuthorsComponent implements ControlValueAccessor {
   @Input() authors: string[];
+  @Input() allAuthors: string[];
   @Input() nameOption: string;
 
   currentValue: string[] = [];
@@ -55,7 +56,6 @@ export class AuthorsComponent implements ControlValueAccessor {
   writeValue(value: any) {
     if (value !== this.currentValue && value !== null) {
       this.currentValue = value;
-      console.log(this.currentValue);
     } else if (value !== this.currentValue) {
       this.currentValue = this.authors;
     }

@@ -18,6 +18,7 @@ export class EditCourseComponent implements OnInit {
   editCourseForm: FormGroup;
   courseId: number = undefined;
   authors: string[] = [];
+  allAuthors: string[] = [];
 
   constructor(private courseServ: CoursesService,
               private fb: FormBuilder,
@@ -40,6 +41,11 @@ export class EditCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.courseServ.getAuthorsList()
+      .subscribe( authors => {
+        this.allAuthors = authors.map(author => `${author.firstName} ${author.lastName}`);
+      });
+    this.courseServ.editCourse(true);
     this.route.params.subscribe( params => {
       if (params['id']) {
         this.courseId = +params['id'];
@@ -66,6 +72,7 @@ export class EditCourseComponent implements OnInit {
     }
     this.editCourseForm.reset();
     console.log(JSON.parse(localStorage.getItem('editedCourse')));
+    this.courseServ.editCourse(false);
     this.router.navigate(['/courses']);
   }
 }
