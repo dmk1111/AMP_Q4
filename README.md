@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3.
 
+## Backend and Development server
+
+Run `npm run dev` to start backend from `mock-server` folder on `localhost:3004` and webpack dev-server on `http://localhost:4200/` with only one command.
+
+Don't forget to install dependencies for both frontend and backend first.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
