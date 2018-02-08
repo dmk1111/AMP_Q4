@@ -37,20 +37,19 @@
     </div>
   </div>
   <div>
-    <label for="duration">Duration
+    <label for="length">Duration
     </label>
-    <input type="number" id="duration" name="duration" formControlName="duration">
-    {{editCourseForm.get("duration").value |
-    duration}}
+    <input type="number" id="length" name="length" formControlName="length">
+    {{editCourseForm.get("length").value | duration}}
 
     <div class="validation-error"
-         *ngIf="editCourseForm.get('duration').errors?.required && editCourseForm.get('duration').touched"> Duration is
+         *ngIf="editCourseForm.get('length').errors?.required && editCourseForm.get('length').touched"> Duration is
       required
     </div>
   </div>
   <div>
     <label>Authors: </label>
-    <authors-input formControlName="authors" [authors]="authors" [nameOption]="authors"></authors-input>
+    <authors-input formControlName="authors" [allAuthors]="allAuthors" [authors]="authors" [nameOption]="authors"></authors-input>
     <div class="validation-error"
          *ngIf="editCourseForm.get('authors').errors?.required && editCourseForm.get('authors').touched"> At least one
       author should be present

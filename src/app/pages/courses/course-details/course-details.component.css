@@ -50,6 +50,7 @@
 
 .buttons button {
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .top-rated {

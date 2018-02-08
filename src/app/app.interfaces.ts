@@ -1,5 +1,5 @@
 export interface ICourseDetails {
-  id: number,
+  id: number;
   date: string;
   description: string;
   type: 'Video' | 'Webinar';
@@ -7,11 +7,12 @@ export interface ICourseDetails {
   editCourse?: () => void;
   deleteCourse?: () => void;
   isTopRated?: boolean;
-  authors?: Author[]
+  authors?: IAuthor[];
+  name: string;
 }
 
-export interface Author {
-  id: number,
-  firstName: string,
-  lastName: string
+export interface IAuthor {
+  id: number;
+  firstName: string;
+  lastName: string;
 }

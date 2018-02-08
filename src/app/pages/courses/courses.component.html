@@ -1,7 +1,7 @@
 
 <app-toolbox
   (search)="search($event)"></app-toolbox>
-<div *ngIf="!editing && courses && courses.length !== 0">
+<div *ngIf="courses && courses.length !== 0">
 <course-details *ngFor="let course of courses | orderBy:'date':'Date'; index as i"
                 [course]="course"
                 (removeCourse)="removeCourse($event)"
@@ -11,6 +11,3 @@
 <div *ngIf="!courses || courses.length === 0" class="no-courses">
   <p>No data. Feel free to add new course</p>
 </div>
-<app-edit-course *ngIf="editing">
-
-</app-edit-course>

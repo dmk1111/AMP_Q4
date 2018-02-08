@@ -19,6 +19,8 @@ import { SearchPipe } from './pipes/search.pipe';
 import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { AuthorsComponent } from './common/controls/authors/authors.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { NotFoundComponent } from './common/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { AuthorsComponent } from './common/controls/authors/authors.component';
     OrderByPipe,
     SearchPipe,
     EditCourseComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     AuthorizationService,

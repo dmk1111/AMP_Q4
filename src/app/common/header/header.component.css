@@ -26,3 +26,15 @@
 .user-info p {
   margin: 0;
 }
+
+.breadcrumbs {
+  margin: 0 20px;
+}
+
+.breadcrumbs button {
+  height: 30px;
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}

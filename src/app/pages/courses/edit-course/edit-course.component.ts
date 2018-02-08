@@ -4,6 +4,8 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {DurationPipe} from '../../../pipes/duration.pipe';
 import {CoursesService} from '../../../services/courses.service';
 import {validateAuthors} from '../../../common/validators/validateAuthors';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-edit-course',
@@ -15,14 +17,13 @@ export class EditCourseComponent implements OnInit {
 
   editCourseForm: FormGroup;
   courseId: number = undefined;
-  authors: string[] = [
-    'Ozzy Osbourne',
-    'Marilyn Manson',
-    'Varg Vikernes',
-    'James Hetfield'
-  ];
+  authors: string[] = [];
+  allAuthors: string[] = [];
 
-  constructor(private courseServ: CoursesService, private fb: FormBuilder) {
+  constructor(private courseServ: CoursesService,
+              private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.editCourseForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
@@ -34,12 +35,32 @@ export class EditCourseComponent implements OnInit {
           /^((0[1-9]|[12][0-9]|3[01])(\/)(0[13578]|1[02]))|((0[1-9]|[12][0-9])(\/)(02))|((0[1-9]|[12][0-9]|3[0])(\/)(0[469]|11))(\/)\d{4}$/)
         ]
       ],
-      duration: [0, Validators.required],
-      authors: [undefined, [Validators.required, validateAuthors]],
+      length: [0, Validators.required],
+      authors: [[], [Validators.required, validateAuthors]],
     });
   }
 
   ngOnInit() {
+    this.courseServ.getAuthorsList()
+      .subscribe( authors => {
+        this.allAuthors = authors.map(author => `${author.firstName} ${author.lastName}`);
+      });
+    this.courseServ.editCourse(true);
+    this.route.params.subscribe( params => {
+      if (params['id']) {
+        this.courseId = +params['id'];
+        this.courseServ.getItem(this.courseId).subscribe( course => {
+          this.editCourseForm.patchValue({'title': course.name });
+          this.editCourseForm.patchValue({'description': course.description});
+          this.editCourseForm.patchValue({'date': new DatePipe('en').transform(course.date, 'dd/MM/yyyy')});
+          this.editCourseForm.patchValue({'length': course.length});
+          this.authors = course.authors.map( author => {
+            return `${author.firstName} ${author.lastName}`;
+          });
+          this.editCourseForm.patchValue({'authors': this.authors});
+          });
+      }
+    });
   }
 
   stopEditing(): void {
@@ -49,8 +70,9 @@ export class EditCourseComponent implements OnInit {
     } else {
       this.courseServ.createCourse(this.editCourseForm.value);
     }
-    this.courseServ.editCourse(false);
     this.editCourseForm.reset();
     console.log(JSON.parse(localStorage.getItem('editedCourse')));
+    this.courseServ.editCourse(false);
+    this.router.navigate(['/courses']);
   }
 }
