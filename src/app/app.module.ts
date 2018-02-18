@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './pages/courses/courses.component';
@@ -17,10 +18,11 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditCourseComponent } from './pages/courses/edit-course/edit-course.component';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthorsComponent } from './common/controls/authors/authors.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { NotFoundComponent } from './common/not-found/not-found.component';
+import { authReducer } from './common/courses.reducer';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ auth: authReducer })
   ],
   providers: [
     AuthorizationService,

@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import '../styles.css';
 import { AuthorizationService } from './services/authorization.service';
-import { Subscription } from "rxjs/Subscription";
-import {Router} from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,10 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
 
   private subscription: Subscription;
-  constructor(private authServ: AuthorizationService, private router: Router) {}
+
+  constructor(private authServ: AuthorizationService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.authServ.checkAuth();
