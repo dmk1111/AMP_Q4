@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import {AuthorizationService} from '../../services/authorization.service';
-import { Subscription } from "rxjs/Subscription";
-import {CoursesService} from '../../services/courses.service';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthorizationService } from '../../services/authorization.service';
+import { Subscription } from 'rxjs/Subscription';
+import { CoursesService } from '../../services/courses.service';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +11,11 @@ import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  placeholder: string = 'user login';
+  placeholder = 'user login';
   username: string;
   authorized: boolean;
-  editing: boolean = false;
-  courseInfo: string = '';
+  editing = false;
+  courseInfo = '';
 
   private subscription: Subscription;
 
@@ -28,13 +28,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isAuthorized();
     this.courseServ.isEditingCourse()
-      .subscribe( editing => {
+      .subscribe(editing => {
         this.editing = editing;
       });
-    this.activatedRoute.params.subscribe( params => {
+    this.activatedRoute.params.subscribe(params => {
       console.log(params);
     });
-    this.router.events.subscribe( event => {
+    this.router.events.subscribe(event => {
       if (event instanceof ActivationEnd && event.snapshot.children[0] !== undefined) {
         if (event.snapshot.children[0].routeConfig.path === 'new') {
           this.courseInfo = 'Create New Course';
@@ -57,12 +57,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthorized(): void {
     this.subscription = this.authServ.isAuth()
       .subscribe(auth => {
-        this.username = this.authServ.getUserInfo();
-        this.authorized = auth;
-      },
+          this.username = this.authServ.getUserInfo();
+          this.authorized = auth;
+        },
         err => {
-        this.username = '';
-        this.authorized = false;
+          this.username = '';
+          this.authorized = false;
         });
   }
 
