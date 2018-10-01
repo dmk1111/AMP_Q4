@@ -16,7 +16,7 @@ export class PlateBorderDirective implements OnChanges {
       this.checkdate(this.appPlateBorder);
   }
 
-  private checkdate(createdDate: string) {
+  public checkdate(createdDate: string) {
   if (!this.init) {
     this.oldBorder = this.elem.nativeElement.style.border;
     this.init = true;
@@ -35,7 +35,7 @@ export class PlateBorderDirective implements OnChanges {
 
   }
 
-  private setBorderColor(color?: string) {
+  public setBorderColor(color?: string) {
     this.elem.nativeElement.style.border = `1px solid ${color}`;
     if (!color) {
       this.elem.nativeElement.style.border = this.oldBorder;

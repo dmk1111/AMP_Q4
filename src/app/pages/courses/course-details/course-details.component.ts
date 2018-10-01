@@ -1,9 +1,8 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ICourseDetails } from '../../../app.interfaces';
 import { UpperCasePipe } from '@angular/common';
 import { DurationPipe } from '../../../pipes/duration.pipe';
-import { CoursesService } from '../../../services/courses.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'course-details',
@@ -12,7 +11,7 @@ import {Router} from '@angular/router';
   providers: [UpperCasePipe, DurationPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails {
+export class CourseDetailsComponent implements OnChanges, ICourseDetails {
   @Input() course: ICourseDetails;
   @Output() removeCourse: EventEmitter<any> = new EventEmitter();
 
@@ -23,11 +22,7 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
   public length;
   public name;
 
-  constructor(private upPipe: UpperCasePipe, private courseSev: CoursesService, private router: Router) {
-
-  }
-
-  ngOnInit() {
+  constructor(private upPipe: UpperCasePipe, private router: Router) {
 
   }
 
@@ -37,7 +32,6 @@ export class CourseDetailsComponent implements OnInit, OnChanges, ICourseDetails
     this.description = this.course.description;
     this.type = this.course.type === 'Video' ? this.upPipe.transform(this.course.type) : this.course.type ;
     this.length = this.course.length;
-
   }
 
   editCourse() {
